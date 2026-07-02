@@ -248,87 +248,32 @@ function number(id){
 
 function renderBattleList(){
 
-    const list=document.getElementById("battleList");
+  const container = document.getElementById("battleList");
+  container.innerHTML = "";
 
-    if(!list) return;
+  battles.forEach(battle => {
 
-    if(battles.length===0){
+    const weaponClass = getWeaponClass(battle.weapon);
 
-        list.innerHTML=`
-        <div class="card">
-        まだ戦績がありません
-        </div>
-        `;
+    const card = document.createElement("div");
+    card.className = "card";
 
-        return;
+    card.innerHTML = `
+      <div class="battle-header">
+        ${getBattleBadge(battle.result)}
+        <span class="${weaponClass}">${battle.weapon}</span>
+      </div>
 
-    }
+      <div class="battle-info">
+        <p>ルール：${battle.rule}</p>
+        <p>ステージ：${battle.stage}</p>
+        <p>キル：${battle.kill} / デス：${battle.death}</p>
+      </div>
+    `;
 
-    list.innerHTML="";
-
-    battles.forEach((battle,index)=>{
-
-        const card=document.createElement("div");
-
-        card.className="battleCard";
-
-        card.innerHTML=`
-
-        <span class="badge ${battle.result}">
-            ${resultText(battle.result)}
-        </span>
-
-        <h3>${battle.weapon}</h3>
-
-        <div>${battle.stage}</div>
-
-        <div>${battle.rule}</div>
-
-        <div>${battle.battleType}</div>
-
-        <br>
-
-        <b>
-        ${battle.kill}K /
-        ${battle.assist}A /
-        ${battle.death}D
-        </b>
-
-        <br>
-
-        塗り ${battle.paint}p
-
-        <br>
-
-        SP ${battle.special}
-
-        <br><br>
-
-        <button
-        class="deleteBtn"
-        onclick="deleteBattle(${index})">
-
-        削除
-
-        </button>
-
-        `;
-
-        card.onclick=(e)=>{
-
-            if(e.target.classList.contains("deleteBtn"))
-            return;
-
-            openBattle(index);
-
-        };
-
-        list.appendChild(card);
-
-    });
-
+    container.appendChild(card);
+  });
 }
-
 /*==============================
   勝敗表示
 ==============================*/
@@ -1097,4 +1042,16 @@ function searchBattle(word){
 
     );
 
+}
+function getWeaponClass(weapon){
+  if(weapon.includes("シューター")) return "weapon-shooter";
+  if(weapon.includes("ローラー")) return "weapon-roller";
+  if(weapon.includes("チャージャー")) return "weapon-charger";
+  if(weapon.includes("スロッシャー")) return "weapon-slosher";
+  return "";
+}
+function getBattleBadge(result){
+  return result === "win"
+    ? '<span class="badge win">WIN</span>'
+    : '<span class="badge lose">LOSE</span>';
 }

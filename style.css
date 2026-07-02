@@ -1151,3 +1151,40 @@ border-radius:18px;
 margin-top:15px;
 
 }
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.win {
+  background: #1db954;
+  color: #000;
+}
+
+.lose {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+/* 武器カラー */
+.weapon-shooter { color: #4cc9f0; }
+.weapon-roller  { color: #f72585; }
+.weapon-charger { color: #7209b7; }
+.weapon-slosher { color: #fca311; }
+
+/* 詳細カード用 */
+.battle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.battle-info p {
+  margin: 4px 0;
+  font-size: 14px;
+  opacity: 0.85;
+}

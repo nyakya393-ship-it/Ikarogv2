@@ -251,7 +251,7 @@ function renderBattleList(){
   const container = document.getElementById("battleList");
   container.innerHTML = "";
 
-  battles.forEach(battle => {
+  battles.forEach((battle, index) => {
 
     const weaponClass = getWeaponClass(battle.weapon);
 
@@ -268,6 +268,11 @@ function renderBattleList(){
         <p>ルール：${battle.rule}</p>
         <p>ステージ：${battle.stage}</p>
         <p>キル：${battle.kill} / デス：${battle.death}</p>
+      </div>
+
+      <div style="margin-top:10px; display:flex; gap:8px;">
+        <button onclick="showDetail(${index})">詳細</button>
+        <button onclick="deleteBattle(${index})">削除</button>
       </div>
     `;
 
